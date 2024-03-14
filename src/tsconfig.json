@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "target": "es2022",
+        "strict": true,
+        "baseUrl": "./",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "paths": {
+            "@/*": ["./resources/js/*"],
+            "@components/*": ["./resources/js/components/*"],
+        },
+        "module": "esnext",
+        "moduleResolution": "Bundler",
+        "types": ["node", "vite/client", "@intlify/unplugin-vue-i18n/messages"],
+        "skipLibCheck": true,
+        "lib": ["es2022", "dom", "dom.iterable"]
+    },
+    "include": [
+        "resources/**/*.ts",
+        "resources/**/*.js",
+        "resources/**/*.vue",
+    ],
+    "exclude": ["node_modules"]
+}
