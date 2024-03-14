@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "vue.vscode-typescript-vue-plugin",
+    "esbenp.prettier-vscode",
+    "bmewburn.vscode-intelephense-client",
+    "amiralizadeh9480.laravel-extra-intellisense",
+    "dbaeumer.vscode-eslint",
+    "open-southeners.laravel-pint"
+  ]
+}

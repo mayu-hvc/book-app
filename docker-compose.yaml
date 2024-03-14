@@ -1,0 +1,80 @@
+version: "3.8"
+services:
+  php:
+    build:
+      args:
+        user: www
+        uid: 1000
+      context: ./
+      dockerfile: dockerfile-php
+    container_name: book-app-php
+    environment:
+      TZ: "Asia/Tokyo"
+    working_dir: /var/www/
+    volumes:
+      - ./src:/var/www
+      - ./docker-compose/php/app.ini:/usr/local/etc/php/conf.d/app.ini
+
+  db:
+    image: mysql:8.0
+    container_name: book-app-db
+    environment:
+      MYSQL_DATABASE: book-app
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: password
+      MYSQL_USER: book-app
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./docker-compose/mysql/low-memory-my.cnf:/etc/mysql/my.cnf
+      - db-data:/var/lib/mysql
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-book-app
+    environment:
+      TZ: "Asia/Tokyo"
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+      - ./log:/var/log/nginx
+
+  node:
+    image: node:lts
+    container_name: node-book-app
+    command: "tail -f /dev/null"
+    ports:
+      - "${VITE_PORT:-5173}:${VITE_PORT:-5173}"
+    environment:
+      TZ: "Asia/Tokyo"
+    working_dir: /var/www/
+    volumes:
+      - ./src:/var/www
+
+  myadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin-book-app
+    ports:
+      - "5000:80"
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: book-app
+      MYSQL_PASSWORD: password
+      PMA_USER: root
+      PMA_PASSWORD: root
+      TZ: "Asia/Tokyo"
+
+  cache:
+    image: redis
+    container_name: redis-book-app
+    environment:
+      TZ: "Asia/Tokyo"
+
+volumes:
+  db-data:

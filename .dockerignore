@@ -1,0 +1,5 @@
+# Default things to ignore
+.git
+README.md
+
+# Project specific things to ignore

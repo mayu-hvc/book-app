@@ -1,0 +1,20 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+
+  "prettier.configPath": "./src/.prettierrc",
+  "prettier.documentSelectors": ["{**/*,*}.{js,ts,jsx,tsx,vue}"],
+  "prettier.enableDebugLogs": false,
+  "eslint.enable": true,
+  "laravel-pint.enable": true,
+  "eslint.run": "onType",
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[php]": {
+    "editor.defaultFormatter": "open-southeners.laravel-pint"
+  }
+}
